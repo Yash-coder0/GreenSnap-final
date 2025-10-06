@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import Navbar from "@/components/Navbar";
 import TreeCard from "@/components/TreeCard";
-import { Loader2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Loader2, SlidersHorizontal } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 interface TreePost {
@@ -22,6 +23,7 @@ interface TreePost {
 const Feed = () => {
   const [posts, setPosts] = useState<TreePost[]>([]);
   const [loading, setLoading] = useState(true);
+  const [sortBy, setSortBy] = useState<"recent" | "trees" | "coins">("recent");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -57,7 +59,7 @@ const Feed = () => {
 
   const loadPosts = async () => {
     try {
-      const { data, error } = await supabase
+      let query = supabase
         .from("tree_posts")
         .select(
           `
@@ -67,8 +69,18 @@ const Feed = () => {
             avatar_url
           )
         `
-        )
-        .order("created_at", { ascending: false });
+        );
+
+      // Apply sorting
+      if (sortBy === "recent") {
+        query = query.order("created_at", { ascending: false });
+      } else if (sortBy === "trees") {
+        query = query.order("tree_count", { ascending: false });
+      } else if (sortBy === "coins") {
+        query = query.order("coins_earned", { ascending: false });
+      }
+
+      const { data, error } = await query;
 
       if (error) throw error;
       setPosts(data || []);
@@ -79,14 +91,50 @@ const Feed = () => {
     }
   };
 
+  useEffect(() => {
+    if (!loading) {
+      loadPosts();
+    }
+  }, [sortBy]);
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
 
       <main className="container mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-foreground mb-2">Community Feed</h1>
-          <p className="text-muted-foreground">See what the community has been planting</p>
+        <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div>
+            <h1 className="text-4xl font-bold text-foreground mb-2">Community Feed</h1>
+            <p className="text-muted-foreground">See what the community has been planting</p>
+          </div>
+          
+          <div className="flex items-center gap-2">
+            <SlidersHorizontal className="h-4 w-4 text-muted-foreground" />
+            <span className="text-sm text-muted-foreground mr-2">Sort by:</span>
+            <div className="flex gap-2">
+              <Button 
+                variant={sortBy === "recent" ? "default" : "outline"}
+                size="sm"
+                onClick={() => setSortBy("recent")}
+              >
+                Recent
+              </Button>
+              <Button 
+                variant={sortBy === "trees" ? "default" : "outline"}
+                size="sm"
+                onClick={() => setSortBy("trees")}
+              >
+                Most Trees
+              </Button>
+              <Button 
+                variant={sortBy === "coins" ? "default" : "outline"}
+                size="sm"
+                onClick={() => setSortBy("coins")}
+              >
+                Most Coins
+              </Button>
+            </div>
+          </div>
         </div>
 
         {loading ? (
