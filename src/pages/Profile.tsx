@@ -126,7 +126,7 @@ const Profile = () => {
 
         {/* User Posts */}
         <div className="mb-6">
-          <h2 className="text-2xl font-bold text-foreground mb-4">Your Contributions</h2>
+          <h2 className="text-2xl font-bold text-foreground mb-4">My Contributions</h2>
         </div>
 
         {posts.length === 0 ? (

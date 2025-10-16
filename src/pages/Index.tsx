@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { Leaf, Upload, Users, Coins, Trees, Heart, ChevronDown, Globe, Award, TrendingUp } from "lucide-react";
+import { Leaf, Upload, Users, Coins, Trees, Heart, ChevronDown, Globe, Award, TrendingUp, Home, Share2 } from "lucide-react";
 import heroImage from "@/assets/hero-image.jpg";
 import { useState } from "react";
 
@@ -42,12 +42,11 @@ const Index = () => {
           </div>
           
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 animate-fade-in">
-            Plant Trees, Earn Rewards
+            Plant Trees, Earn Rewards, Save Earth
           </h1>
           
           <p className="text-xl md:text-2xl text-white/90 mb-8 animate-fade-in">
-            Join our global community of tree planters. Upload your tree photos and
-            earn coins based on your environmental impact!
+            GreenSnap connects people to contribute to a greener future.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in">
@@ -58,18 +57,18 @@ const Index = () => {
             </Button>
             <Button asChild size="lg" variant="secondary" className="text-lg px-8 py-6">
               <Link to="/feed">
-                View Community
+                Explore Feed
               </Link>
             </Button>
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* How It Works Section */}
       <section className="py-20 px-4 bg-muted/30">
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-4xl font-bold text-center mb-4 text-foreground">
-            How It Works
+            How it works
           </h2>
           <p className="text-center text-muted-foreground mb-12 text-lg">
             Simple steps to make a difference
@@ -79,25 +78,20 @@ const Index = () => {
             <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
               <CardContent className="pt-6 text-center space-y-4">
                 <div className="inline-block p-4 bg-primary/10 rounded-full">
-                  <Upload className="h-12 w-12 text-primary" />
+                  <Trees className="h-12 w-12 text-primary" />
                 </div>
-                <h3 className="text-2xl font-bold text-foreground">1. Upload</h3>
-                <p className="text-muted-foreground">
-                  Take a photo of the trees you've planted and upload it to our
-                  platform
-                </p>
+                <h3 className="text-2xl font-bold text-foreground">1. Plant</h3>
+                <p className="text-muted-foreground">Plant a tree in your community or backyard.</p>
               </CardContent>
             </Card>
 
             <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
               <CardContent className="pt-6 text-center space-y-4">
                 <div className="inline-block p-4 bg-secondary/20 rounded-full">
-                  <Trees className="h-12 w-12 text-secondary" />
+                  <Share2 className="h-12 w-12 text-secondary" />
                 </div>
-                <h3 className="text-2xl font-bold text-foreground">2. Verify</h3>
-                <p className="text-muted-foreground">
-                  Our system analyzes your photo to count trees and assess quality
-                </p>
+                <h3 className="text-2xl font-bold text-foreground">2. Share</h3>
+                <p className="text-muted-foreground">Upload a photo and tell the story behind your planting.</p>
               </CardContent>
             </Card>
 
@@ -107,9 +101,7 @@ const Index = () => {
                   <Coins className="h-12 w-12 text-accent" />
                 </div>
                 <h3 className="text-2xl font-bold text-foreground">3. Earn</h3>
-                <p className="text-muted-foreground">
-                  Receive coins based on the number and quality of trees planted
-                </p>
+                <p className="text-muted-foreground">Collect coins and track your environmental impact.</p>
               </CardContent>
             </Card>
           </div>
@@ -298,9 +290,9 @@ const Index = () => {
         <div className="container mx-auto text-center text-muted-foreground">
           <div className="flex items-center justify-center gap-2 mb-2">
             <Leaf className="h-5 w-5 text-primary" />
-            <span className="font-semibold text-foreground">TreePlanter</span>
+            <span className="font-semibold text-foreground">GreenSnap</span>
           </div>
-          <p>Making the world greener, together.</p>
+          <p>© {new Date().getFullYear()} GreenSnap. All rights reserved.</p>
         </div>
       </footer>
     </div>

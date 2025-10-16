@@ -32,6 +32,29 @@ const Upload = () => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile) {
+      const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
+      const maxSizeBytes = 5 * 1024 * 1024; // 5MB
+
+      if (!allowedTypes.includes(selectedFile.type)) {
+        toast({
+          title: "Invalid file type",
+          description: "Please select a JPG or PNG image.",
+          variant: "destructive",
+        });
+        e.currentTarget.value = "";
+        return;
+      }
+
+      if (selectedFile.size > maxSizeBytes) {
+        toast({
+          title: "File too large",
+          description: "Maximum file size is 5MB.",
+          variant: "destructive",
+        });
+        e.currentTarget.value = "";
+        return;
+      }
+
       setFile(selectedFile);
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -165,7 +188,7 @@ const Upload = () => {
                     </span>
                     <input
                       type="file"
-                      accept="image/*"
+                      accept=".jpg,.jpeg,.png"
                       onChange={handleFileChange}
                       className="hidden"
                       required

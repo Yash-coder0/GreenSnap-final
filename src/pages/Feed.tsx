@@ -143,9 +143,7 @@ const Feed = () => {
           </div>
         ) : posts.length === 0 ? (
           <div className="text-center py-16">
-            <p className="text-xl text-muted-foreground mb-4">
-              No trees planted yet. Be the first!
-            </p>
+            <p className="text-xl text-muted-foreground mb-4">No posts yet</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
