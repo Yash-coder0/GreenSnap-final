@@ -8,12 +8,14 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Upload as UploadIcon, Loader2, Image as ImageIcon } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const Upload = () => {
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string>("");
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
+  const [healthStatus, setHealthStatus] = useState<string>("Healthy");
   const [uploading, setUploading] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
   const navigate = useNavigate();
@@ -116,6 +118,7 @@ const Upload = () => {
         image_url: publicUrl,
         description: description.trim() || null,
         location: location.trim() || null,
+        health_status: healthStatus,
         tree_count: treeCount,
         coins_earned: coinsEarned,
       });
@@ -223,6 +226,23 @@ const Upload = () => {
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
                 />
+              </div>
+
+              {/* Health Status */}
+              <div className="space-y-2">
+                <label htmlFor="healthStatus" className="text-sm font-medium">
+                  Plant Health Status
+                </label>
+                <Select value={healthStatus} onValueChange={setHealthStatus}>
+                  <SelectTrigger id="healthStatus">
+                    <SelectValue placeholder="Select health status" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Healthy">Healthy</SelectItem>
+                    <SelectItem value="Needs Water">Needs Water</SelectItem>
+                    <SelectItem value="Diseased">Diseased</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
               <Button type="submit" className="w-full" disabled={uploading}>

@@ -10,6 +10,7 @@ interface TreeCardProps {
   userAvatar?: string;
   description?: string;
   location?: string;
+  healthStatus?: string;
   treeCount: number;
   coinsEarned: number;
   createdAt: string;
@@ -21,6 +22,7 @@ const TreeCard = ({
   userAvatar,
   description,
   location,
+  healthStatus,
   treeCount,
   coinsEarned,
   createdAt,
@@ -70,6 +72,10 @@ const TreeCard = ({
             <MapPin className="h-3 w-3" />
             <span>{location}</span>
           </div>
+        )}
+
+        {healthStatus && (
+          <p className="text-xs text-muted-foreground">Health: {healthStatus}</p>
         )}
       </div>
     </Card>

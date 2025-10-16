@@ -11,6 +11,7 @@ interface TreePost {
   image_url: string;
   description: string | null;
   location: string | null;
+  health_status: string | null;
   tree_count: number;
   coins_earned: number;
   created_at: string;
@@ -155,6 +156,7 @@ const Feed = () => {
                 userAvatar={post.profiles.avatar_url || undefined}
                 description={post.description || undefined}
                 location={post.location || undefined}
+                healthStatus={post.health_status || undefined}
                 treeCount={post.tree_count}
                 coinsEarned={post.coins_earned}
                 createdAt={post.created_at}
