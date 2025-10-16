@@ -66,17 +66,7 @@ const Upload = () => {
     }
   };
 
-  const calculateCoins = (treeCount: number): number => {
-    // Simple calculation: 10 coins per tree, with quality bonus
-    const baseCoins = treeCount * 10;
-    const qualityBonus = Math.floor(Math.random() * 20) + 10; // Random 10-30 bonus
-    return baseCoins + qualityBonus;
-  };
-
-  const estimateTreeCount = (): number => {
-    // Mock tree detection - in real app, use AI/ML
-    return Math.floor(Math.random() * 5) + 1; // Random 1-5 trees
-  };
+  // Tree posts are enforced to 1 tree and 1 coin per post
 
   const handleUpload = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -108,9 +98,9 @@ const Upload = () => {
         data: { publicUrl },
       } = supabase.storage.from("tree-images").getPublicUrl(fileName);
 
-      // Calculate rewards
-      const treeCount = estimateTreeCount();
-      const coinsEarned = calculateCoins(treeCount);
+      // Enforce single tree and single coin per post
+      const treeCount = 1;
+      const coinsEarned = 1;
 
       // Create post
       const { error: postError } = await supabase.from("tree_posts").insert({
@@ -127,9 +117,7 @@ const Upload = () => {
 
       toast({
         title: "Success! 🌳",
-        description: `You've earned ${coinsEarned} coins for planting ${treeCount} tree${
-          treeCount > 1 ? "s" : ""
-        }!`,
+        description: "You've earned 1 coin for planting 1 tree!",
       });
 
       navigate("/feed");

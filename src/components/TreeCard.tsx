@@ -38,11 +38,11 @@ const TreeCard = ({
         <div className="absolute top-3 right-3 flex gap-2">
           <Badge className="bg-primary/90 backdrop-blur-sm">
             <Trees className="h-3 w-3 mr-1" />
-            {treeCount}
+            1
           </Badge>
           <Badge className="bg-secondary/90 backdrop-blur-sm">
             <Coins className="h-3 w-3 mr-1" />
-            {coinsEarned}
+            1
           </Badge>
         </div>
       </div>
